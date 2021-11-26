@@ -5,7 +5,6 @@ from pandas.core.frame import DataFrame
 from tabulate import tabulate
 import finnhub
 import pandas as pd
-from werkzeug.wrappers import request
 
 # Reassign the data's keys to be the full names for the table's column names
 key_list: list[str] = ['current_price', 'change', 'percent_change', 'high_day_price', 'low_day_price', 'open_day_price', 'previous_close_price']
@@ -76,8 +75,8 @@ class Request():
 
 
 
-empty_request: Request = Request('', 0, pd.DataFrame())
-request_list: list[Request] = [empty_request]
+# empty_request: Request = Request('', 0, pd.DataFrame())
+request_list = []
 
 
 def data_finder(x):
@@ -100,7 +99,6 @@ def data_finder(x):
     print(df)
     df.to_html('templates/stock_table.html')
 
-    request_list.pop(0)
     request_index_list.append(request_index)
 
     last_index = request_index_list[len(request_index_list) - 1]
@@ -122,5 +120,7 @@ def data_finder(x):
     
     # print(display_stock)
     print(stocks)
+    print(request_index)
+    print(request_list)
 
     request_index += 1

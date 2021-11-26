@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <style>
+            p {text-align: center;}
+            form {text-align: center;}
+        </style>
         <meta charset="UTF-8">
         <title>Stock Notebook</title>
         <link rel="stylesheet" href="/static/bootstrap.min.css">
@@ -30,7 +34,11 @@
             <label for="stock">Enter Symbol:</label>
             <input type="text" name="stock">
             <button type="submit"> Add to List</button>
+            <a href="http://127.0.0.1:5000/stock_table">See Table</a>
             <br />
+        </form>
+        <form method='get'>
+            <button type="submit">Restart</button>
         </form>
     </body>
 </html>
