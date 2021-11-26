@@ -27,11 +27,11 @@
         <form method="post">
             <label for="stocks">My List:</label>
             <br />
-            <button type = 'submit'> {{request_list[]}} </button>
-            <button type = 'submit'> {{display_stock}} </button>
-            <button type = 'submit'> {{display_stock}} </button>
-            <button type = 'submit'> {{display_stock}} </button>
-            <button type = 'submit'> {{display_stock}} </button>
+            <button type = 'submit'> {{request_list[0][0]}} </button> <br><br><br>
+            <button type = 'submit'> {{request_list[1][0]}} </button> <br><br><br>
+            <button type = 'submit'> {{request_list[2][0]}} </button> <br><br><br>
+            <button type = 'submit'> {{request_list[3][0]}} </button> <br><br><br>
+            <button type = 'submit'> {{request_list[4][0]}} </button>
             <!-- <a href="http://127.0.0.1:5000/stock_table" class="button">{{stocks[0]}}</a> <br>
             <a href="http://127.0.0.1:5000/stock_table" class="button">{{stocks[1]}}</a> <br>
             <a href="http://127.0.0.1:5000/stock_table" class="button">{{stocks[2]}}</a> <br>
@@ -40,5 +40,4 @@
             <a href="http://127.0.0.1:5000/stock_table" class="button">{{stocks[5]}}</a> <br> -->
         </form>
     </body>
-    <object type="text/html" data="stonk_table.html"></object>
 </html>

@@ -3,7 +3,7 @@ from helpers import data_finder
 import finnhub
 from tabulate import tabulate
 from helpers import *
-from helpers import display_stock, request_list
+from helpers import display_stock, request_list, request_index
 #import pandas as pd
 
 # Client setup
@@ -34,14 +34,31 @@ async def index():
         return render_template('index.html', stock=stock)
 
     return render_template('index.html', stock=stock)
+    
 
 @app.route("/my-list", methods=["GET", "POST"])
 async def my_list():
     global stocks
     global display_stock
+    global request_list
+    global request_index
+    global request_index_list
     if request.method == "POST":
-        data_finder(display_stock)
-        return render_template('stock_table.html')
+        if request_index == 0:
+            data_finder(request_list[0][0])
+        elif request_index == 1:
+            data_finder(request_list[1][0])
+        elif request_index == 2:
+            data_finder(request_list[2][0])
+        elif request_index == 3:
+            data_finder(request_list[3][0])
+        else:
+            data_finder(request_list[4][0])
+        
+        request_index += 1
+        print(request_index)
+
+        return render_template('stock_table.html', request_list = request_list, display_stock = display_stock, stocks = stocks)
     else:
         return render_template("my-list.html", request_list = request_list, display_stock = display_stock, stocks = stocks)
 

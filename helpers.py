@@ -5,6 +5,7 @@ from pandas.core.frame import DataFrame
 from tabulate import tabulate
 import finnhub
 import pandas as pd
+from werkzeug.wrappers import request
 
 # Reassign the data's keys to be the full names for the table's column names
 key_list: list[str] = ['current_price', 'change', 'percent_change', 'high_day_price', 'low_day_price', 'open_day_price', 'previous_close_price']
@@ -64,7 +65,7 @@ class Request():
 
     def __getitem__(self, rhs: int) -> int:
         """Adds the ability to use subscription with Request objects."""
-        reference_list: list = [self.stock, self.request_index]
+        reference_list: list = [self.stock, self.request_index, self.request_data]
         int_result = reference_list[rhs]
         return int_result
     
@@ -72,7 +73,11 @@ class Request():
         """Automagically converts a Request object to a str."""
         return f"Request({self.stock}, {self.request_index})"
 
-request_list: list[Request] = []
+
+
+
+empty_request: Request = Request('', 0, pd.DataFrame())
+request_list: list[Request] = [empty_request]
 
 
 def data_finder(x):
@@ -95,6 +100,7 @@ def data_finder(x):
     print(df)
     df.to_html('templates/stock_table.html')
 
+    request_list.pop(0)
     request_index_list.append(request_index)
 
     last_index = request_index_list[len(request_index_list) - 1]
@@ -103,23 +109,18 @@ def data_finder(x):
 
     request_list.append(new_request)
 
-    if new_request.request_index == 0:
-        display_stock = stocks[0]
-    elif new_request.request_index == 1:
-        display_stock = stocks[1]
-    elif new_request.request_index == 2:
-        display_stock = stocks[2]
-    elif new_request.request_index == 3:
-        display_stock = stocks[3]
-    else:
-        display_stock = stocks[4]
+    # if new_request.request_index == 0:
+    #     display_stock = request_list[0][0]
+    # elif new_request.request_index == 1:
+    #     display_stock = request_list[0][1]
+    # elif new_request.request_index == 2:
+    #     display_stock = request_list[0][2]
+    # elif new_request.request_index == 3:
+    #     display_stock = request_list[0][3]
+    # else:
+    #     display_stock = stocks[0][4]
     
-    print(display_stock)
+    # print(display_stock)
     print(stocks)
 
     request_index += 1
-
-data_finder('SOFI')
-data_finder('AAPL')
-print(request_list)
-print(request_list[0][1])
