@@ -14,6 +14,8 @@ app: Flask = Flask(__name__)
 async def index():
     global stock
     global stocks
+    global request_index
+    global request_list
     
     if request.method == "POST":
 
@@ -30,8 +32,17 @@ async def index():
             return(render_template("index.html"))
 
         return render_template('index.html', stock=stock)
+    else:
+        global request_list
+        global request_index
+        request_index = -1
+        request_list.clear()
 
-    return render_template('index.html', stock=stock)
+        print('restart button activated')
+
+        print(request_list)
+
+        return render_template('index.html', stock=stock, request_list = request_list)
     
 
 @app.route("/my-list", methods=["GET", "POST"])
@@ -41,13 +52,15 @@ async def my_list():
     global request_list
     global request_index
     global request_index_list
-    while len(request_list) < 6:
-            request_list.append(request_list[0])
+
     if request.method == "POST":
 
         return render_template('stock_table.html', request_list = request_list, display_stock = display_stock, stocks = stocks)
     else:
 
+        while len(request_list) < 6:
+            request_list.append(request_list[len(request_list) - 1])
+        
         return render_template("my-list.html", request_list = request_list, display_stock = display_stock, stocks = stocks)
 
 

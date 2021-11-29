@@ -4,6 +4,8 @@
         <style>
             p {text-align: center;}
             form {text-align: center;}
+            h1 {text-align: center;}
+            h3 {text-align: center}
         </style>
         <meta charset="UTF-8">
         <title>Stock Notebook</title>
@@ -29,16 +31,20 @@
             </ul>
         </div>
     </nav>
-        <p>Stock Market Notebook: Find up-to-date prices and market data for any stock!</p>
+    <h1>Stock Market Notebook</h1> <br>
+        <h3>Find up-to-date prices and market data for any stock!</h3> <br> 
+        <p>Enter up to five stock symbols (all-caps) one at a time. Click the "Clear List" button to clear your list. <br>
+        Click the "See Table" button or "Stock Table" tab to see the table for the last stock you entered. <br>
+        After you see the table of a stock, use the back button of your browser to return to your list or the home page.</p><br>
         <form method="post">
             <label for="stock">Enter Symbol:</label>
             <input type="text" name="stock">
             <button type="submit"> Add to List</button>
             <a href="http://127.0.0.1:5000/stock_table">See Table</a>
             <br />
-        </form>
+        </form> <br>
         <form method='get'>
-            <button type="submit">Restart</button>
+            <button type="submit">Clear List</button>
         </form>
     </body>
 </html>
