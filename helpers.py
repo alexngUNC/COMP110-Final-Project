@@ -74,8 +74,6 @@ class Request():
 
 
 
-
-# empty_request: Request = Request('', 0, pd.DataFrame())
 request_list = []
 
 
